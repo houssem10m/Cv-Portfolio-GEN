@@ -1,0 +1,112 @@
+<div>
+  <div class="row  justify-content-md-center my-3">
+    <div class="col-md-auto w-75">
+      <button class="btn w-100 btn-primary" (click)="download()">
+        Download PDF
+      </button>
+    </div>
+  </div>
+
+  <div id="myPDF">
+
+    <div class="resume-wrapper">
+      <section class="col-sm-5 profile section-padding">
+        <div class="container">
+          <div class="row">
+            <div class="picture-resume-wrapper">
+              <div class="picture">
+                <span><img [src]="imageUrl" class="picture" alt="" /></span>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="name-wrapper">
+              <h1>{{ person.Name }}<br />{{ person.Title }}</h1>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="contact-info clearfix">
+            <ul class="list-titles">
+              <li>Phone</li>
+              <li>Email</li>
+              <li>LinkedIn</li>
+              <li>Address</li>
+              <li>GitHub</li>
+            </ul>
+            <ul class="list-content">
+              <li>{{ person.Phone }}</li>
+              <li>{{ person.Email }}</li>
+              <li>
+                <a href="#">{{ person.LinkedIn }}</a>
+              </li>
+              <li>{{ person.Adress }}</li>
+              <li>
+                <a href="">{{ person.GitHub }}</a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="col-sm-7 experience section-padding">
+        <div class="container">
+          <div class="row ">
+            <div class="contact-presentation">
+              <p style="text-align: justify;">{{ person.Description }}</p>
+            </div>
+
+
+            <h3 class="experience-title">Professional experience</h3>
+            <div class="experiencedetails" *ngFor="let experiences of experiences">
+              <ul>
+                <div class="experience-wrapper">
+                  <div class="company-wrapper clearfix">
+                    <div class="experience-title">{{ experiences.experience }}</div>
+                    <div class="time">{{ experiences.experience_date }}</div>
+                  </div>
+
+                  <div class="job-wrapper clearfix">
+                    <div class="experience-title">
+                      {{ experiences.experience_place }}
+                    </div>
+                  </div>
+                </div>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="row section-wrapper clearfix">
+              <h3 class="section-title">Skills</h3>
+
+              <div class="skillsloop" *ngFor="let skill of skills">
+                <ul>
+
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-striped" role="progressbar"
+                      [ngStyle]="{ 'width.%': skills[0].level * 10 }" aria-valuenow="10" aria-valuemin="0"
+                      aria-valuemax="100"></div>
+                  </div>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="row section-wrapper clearfix">
+              <h3 class="section-title">Professional certificate(s) </h3>
+
+              <div class="certificatesloop" *ngFor="let certificate of certificates">
+                <div class="experience-title">{{ certificate.title }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="container row mt-5">
+  <div class="offset-3 col-6">
+    <h1 class="text-center">Sign In</h1>
+    <form class="example-form" [formGroup]="loginForm" (ngSubmit)="login()">
+      <mat-form-field class="example-full-width">
+        <mat-label>E-mail</mat-label>
+        <input type="email" matInput placeholder="Ex. azerty@gmail.com" formControlName="email" />
+      </mat-form-field>
+      <mat-error *ngIf="submitted && loginForm.controls['email'].hasError('required')">
+        E-mail is required
+      </mat-error>
+      <mat-error *ngIf="submitted && loginForm.controls['email'].hasError('email')">
+        E-mail is invalid
+      </mat-error>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Password</mat-label>
+        <input [type]="hide ? 'password' : 'text'" matInput formControlName="password" />
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-error *ngIf="submitted && loginForm.controls['password'].hasError('required')">
+        Password is required
+      </mat-error>
+
+      <div class="example-button-row">
+        <button mat-raised-button color="primary" style="margin: 10px auto" type="submit"
+          [disabled]="loginForm.invalid">
+          <i class="fas fa-sign-in-alt"></i> Sign In
+        </button>
+        <button class="float-right ms-2" mat-raised-button color="dark" style="margin: 10px auto" type="button"
+          [routerLink]="['/registre']">
+          <i class="fas fa-arrow-alt-circle-left"></i> Go to Sign Up
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

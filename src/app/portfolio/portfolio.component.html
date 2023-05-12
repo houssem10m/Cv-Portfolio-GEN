@@ -1,0 +1,47 @@
+<div class="container mw-100">
+  <div class="row">
+    <div class="col-sm-12 col-md-5">
+      <div class="picture">
+        <img class="picture" [src]="url" alt="" />
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-7">
+      <div class="name">
+        <h1>{{ arr.Name }}</h1>
+      </div>
+      <div class="Title">
+        <h4>{{ arr.Title }}</h4>
+      </div>
+      <div class="description">
+        <p>{{ arr.Description }}</p>
+      </div>
+
+      <div class="row">
+        <span style="font-weight: bold">Adress:</span> {{ arr.Adress }}<br />
+        <span style="font-weight: bold">Email:</span> {{ arr.Mail }}<br />
+        <span style="font-weight: bold">Phone:</span> {{ arr.Phone }}<br />
+        <span style="font-weight: bold">LinkedIn:</span> {{ arr.LinkedIn
+        }}<br />
+        <span style="font-weight: bold">Github:</span> {{ arr.Github }}
+      </div>
+      <hr />
+      <div class="education">
+        <h3>Educations</h3>
+        <br />{{ arr.Education }}
+      </div>
+      <div class="certificates">
+        <h3>Professional certificate(s)</h3>
+        <br />{{ arr.Certificates }}
+      </div>
+      <div class="experience">
+        <h3>Professional experience</h3>
+        <br />{{ arr.Experiences }}
+      </div>
+      <div class="skills">
+        <h3>Skills</h3>
+        <br />{{ arr.Skills }}
+      </div>
+    </div>
+  </div>
+</div>

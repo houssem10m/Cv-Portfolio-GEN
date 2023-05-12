@@ -1,0 +1,65 @@
+<div class="container row mt-5">
+  <div class="offset-3 col-6">
+    <h1 class="text-center">Sign Up</h1>
+    <form class="example-form" [formGroup]="registerForm" (ngSubmit)="register()">
+      <mat-form-field class="example-full-width">
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="Ex. Houssem, Hamdi, Ahmed, Takoi" formControlName="fName" />
+      </mat-form-field>
+      <mat-error *ngIf="submitted && registerForm.controls['fName'].hasError('required')">
+        First Name is required
+      </mat-error>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Ex. Dissem, Chebbi, Ksiksi, Hasni" formControlName="lName" />
+      </mat-form-field>
+      <mat-error *ngIf="submitted && registerForm.controls['lName'].hasError('required')">
+        Last Name is required
+      </mat-error>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>E-mail</mat-label>
+        <input type="email" matInput placeholder="Ex. example@gmail.com" formControlName="email" />
+      </mat-form-field>
+      <mat-error *ngIf="submitted && registerForm.controls['email'].hasError('required')">
+        E-mail is required
+      </mat-error>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="password" />
+      </mat-form-field>
+      <mat-error *ngIf="
+          submitted && registerForm.controls['password'].hasError('required')
+        ">
+        Password is required
+      </mat-error>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Confirm Password</mat-label>
+        <input type="password" matInput formControlName="confirmpassword" />
+      </mat-form-field>
+      <mat-error *ngIf="
+          submitted &&
+          registerForm.controls['confirmpassword'].hasError('required')
+        ">
+        Confirm Password is required
+      </mat-error>
+      <mat-error *ngIf="submitted && registerForm.hasError('misMatch')">
+        Password Confirmation does not much
+      </mat-error>
+
+      <div class="example-button-row">
+        <button mat-raised-button color="primary" style="margin: 10px auto" type="submit"
+          [disabled]="registerForm.invalid">
+          <i class="fas fa-user-plus"></i> Sign Up
+        </button>
+        <button class="float-right ms-2" mat-raised-button color="dark" style="margin: 10px auto" type="button"
+          [routerLink]="['/login']">
+          <i class="fas fa-arrow-alt-circle-left"></i> Go to Sign In
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,401 @@
+<div class="formulaire">
+  <div class="container mw-100">
+    <form [formGroup]="cvForm" class="formulaire" (ngSubmit)="sendData()">
+      <div class="row mt-3">
+        <div class="row justify-content-md-center">
+          <div class="col-md-auto">
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="row">
+                  <h3 class="card-title text-center">Picture</h3>
+                  <div class="row justify-content-md-center">
+                    <div class="col-md-auto ">
+                      <img class="picture" [src]="imageUrl" alt="" *ngIf="imageUrl != ''" />
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3">
+                    <input class="form-control" formControlName="Picture" type="file"
+                      (change)="onFileSelected($event)" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-md-center">
+          <div class="col-md-auto">
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="row">
+                  <h3 class="card-title text-center">Basic information</h3>
+                  <div class="row mb-3">
+                    <div class="col-sm-12 col-md-6">
+                      <label>Full Name :</label>
+                      <input class="form-control" type="text" formControlName="Name" required />
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                      <label>Title :</label>
+                      <input class="form-control" type="text" formControlName="Title" />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <label>Description :</label>
+                      <textarea class="form-control" name="Description" style="height: 115px" id=""
+                        formControlName="Description"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-md-center">
+          <div class="col-md-auto">
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="row">
+                  <h3 class="card-title text-center">Contact</h3>
+                  <div class="row mb-3">
+                    <div class="col-sm-12">
+                      <span>Adresse :</span>
+                      <input class="form-control" type="text" formControlName="Adress" />
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <div class="col-sm-12 col-md-6">
+                      <span>Phone :</span>
+                      <input class="form-control" type="text" formControlName="Phone" />
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                      <span>Email :</span>
+                      <input class="form-control" type="email" formControlName="Email" />
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <div class="col-sm-12 col-md-6">
+                      <span>LinkedIn :</span>
+                      <input class="form-control" type="url" formControlName="LinkedIn" />
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                      <span>Github :</span>
+                      <input class="form-control" type="url" formControlName="GitHub" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="row">
+                <h3 class="card-title text-center">Education(s)</h3>
+                <form class="form-group" [formGroup]="formEducations" (ngSubmit)="onSubmit4()">
+                  <div formArrayName="educationsArray">
+                    <div class="row" *ngFor="
+                        let item of educationsArray.controls;
+                        let i = index
+                      " [formGroupName]="i">
+                      <div class="col-sm-6">
+                        <label class="form-label" for="education_school{{ i }}">School name : {{ i + 1 }}</label>
+                        <input [className]="
+                            item.get('education_school').invalid &&
+                            (item.get('education_school').dirty ||
+                              item.get('education_school').touched)
+                              ? 'form-control is-invalid'
+                              : 'form-control'
+                          " type="text" id="education_school{{ i }}" formControlName="education_school" />
+                        <div *ngIf="
+                            item.get('education_school').invalid &&
+                            (item.get('education_school').dirty ||
+                              item.get('education_school').touched)
+                          " class="invalid-feedback">
+                          <div *ngIf="
+                              item.get('education_school').errors['required']
+                            ">
+                            The education school name is required!
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-2">
+                        <label class="form-label" for="education_place{{ i }}">Level :</label>
+                        <input [className]="
+                            item.get('education_place').invalid &&
+                            (item.get('education_place').dirty ||
+                              item.get('education_place').touched)
+                              ? 'form-control is-invalid'
+                              : 'form-control'
+                          " min="1" max="7" type="number" id="level{{ i }}" formControlName="education_place" />
+                        <div *ngIf="
+                            item.get('education_place').invalid &&
+                            (item.get('education_place').dirty ||
+                              item.get('education_place').touched)
+                          " class="invalid-feedback">
+                          <div *ngIf="
+                              item.get('education_place').errors['required']
+                            ">
+                            The education level is required!
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <label class="form-label" for="education_date{{ i }}">Date :</label>
+                        <input [className]="
+                            item.get('education_date').invalid &&
+                            (item.get('education_date').dirty ||
+                              item.get('education_date').touched)
+                              ? 'form-control is-invalid'
+                              : 'form-control'
+                          " type="date" id="level{{ i }}" formControlName="education_date" />
+                        <div *ngIf="
+                            item.get('education_date').invalid &&
+                            (item.get('education_date').dirty ||
+                              item.get('education_date').touched)
+                          " class="invalid-feedback">
+                          <div *ngIf="
+                              item.get('education_date').errors['required']
+                            ">
+                            The eduaction date is required!
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-2 d-flex align-items-end justify-content-between">
+                        <button class="btn btn-success mt-4" type="button" (click)="addeducations()">
+                          +
+                        </button>
+
+                        <button class="btn btn-danger" type="button" *ngIf="i > 0" (click)="removeeducations(i)">
+                          -
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="row">
+                <h3 class="card-title text-center">
+                  Professional certificate(s)
+                </h3>
+                <form class="form-group" [formGroup]="formCertificates" (ngSubmit)="onSubmit3()">
+                  <div formArrayName="certificatesArray">
+                    <div class="row mb-3" *ngFor="
+                        let item of certificatesArray.controls;
+                        let i = index
+                      " [formGroupName]="i">
+                      <div class="col-sm-5">
+                        <label class="form-label" for="title{{ i }}">Certification : {{ i + 1 }}</label>
+                        <input [className]="
+                            item.get('title').invalid &&
+                            (item.get('title').dirty ||
+                              item.get('title').touched)
+                              ? 'form-control is-invalid'
+                              : 'form-control'
+                          " type="text" id="title{{ i }}" formControlName="title" />
+                        <div class="invalid-feedback">
+                          <div>The title of certification is required!</div>
+                        </div>
+                      </div>
+                      <div class="col-sm-5">
+                        <label class="form-label" for="certificate_date{{ i }}">Date :</label>
+                        <input [className]="
+                            item.get('certificate_date').invalid &&
+                            (item.get('certificate_date').dirty ||
+                              item.get('certificate_date').touched)
+                              ? 'form-control is-invalid'
+                              : 'form-control'
+                          " type="date" id="certificate_date{{ i }}" formControlName="certificate_date" />
+                        <div *ngIf="
+                            item.get('certificate_date').invalid &&
+                            (item.get('certificate_date').dirty ||
+                              item.get('certificate_date').touched)
+                          " class="invalid-feedback">
+                          <div *ngIf="
+                              item.get('certificate_date').errors['required']
+                            ">
+                            The date of certification is required!
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-2 d-flex align-items-end justify-content-between">
+                        <button class="btn btn-success mt-4" type="button" (click)="addcertificates()">
+                          +
+                        </button>
+
+                        <button class="btn btn-danger" type="button" *ngIf="i > 0" (click)="removecertificates(i)">
+                          -
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="row">
+                <h3 class="card-title text-center">Professional Experience(s)</h3>
+                <form class="form-group" [formGroup]="experienceForm">
+                  <div formArrayName="experienceArray">
+                    <div class="row" *ngFor="
+                        let item of experienceArray.controls;
+                        let i = index
+                      " [formGroupName]="i">
+                      <div class="col-sm-4">
+                        <label class="form-label" for="experience{{ i }}">Title : {{ i + 1 }}</label>
+                        <input [className]="
+                            item.get('experience').invalid &&
+                            (item.get('experience').dirty ||
+                              item.get('experience').touched)
+                              ? 'form-control is-invalid'
+                              : 'form-control'
+                          " type="text" id="experience{{ i }}" formControlName="experience" />
+                        <div class="invalid-feedback">
+                          <div>The experience title is required!</div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <label class="form-label" for="experience_place{{ i }}">Place :</label>
+                        <input [className]="
+                            item.get('experience_place').invalid &&
+                            (item.get('experience_place').dirty ||
+                              item.get('experience_place').touched)
+                              ? 'form-control is-invalid'
+                              : 'form-control'
+                          " type="text" id="experience_place{{ i }}" formControlName="experience_place" />
+                        <div *ngIf="
+                            item.get('experience_place').invalid &&
+                            (item.get('experience_place').dirty ||
+                              item.get('experience_place').touched)
+                          " class="invalid-feedback">
+                          <div *ngIf="
+                              item.get('experience_place').errors['required']
+                            ">
+                            The place of experiencxe is required!
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <label class="form-label" for="experience_date{{ i }}">Date :</label>
+                        <input [className]="
+                            item.get('experience_place').invalid &&
+                            (item.get('experience_date').dirty ||
+                              item.get('experience_date').touched)
+                              ? 'form-control is-invalid'
+                              : 'form-control'
+                          " type="date" id="experience_date{{ i }}" formControlName="experience_date" />
+                        <div *ngIf="
+                            item.get('experience_date').invalid &&
+                            (item.get('experience_date').dirty ||
+                              item.get('experience_date').touched)
+                          " class="invalid-feedback">
+                          <div *ngIf="
+                              item.get('experience_date').errors['required']
+                            ">
+                            The date is required!
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-2 d-flex align-items-end justify-content-between">
+                        <button class="btn btn-success mt-4" type="button" (click)="addexperience()">
+                          +
+                        </button>
+
+                        <button class="btn btn-danger" type="button" *ngIf="i > 0" (click)="removeexperience(i)">
+                          -
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="row">
+                <h3 class="card-title text-center">Professional skill(s)</h3>
+                <form class="form-group" [formGroup]="formSkills" (ngSubmit)="onSubmit2()">
+                  <div formArrayName="skillsArray">
+                    <div class="row mb-3" *ngFor="let item of skillsArray.controls; let i = index" [formGroupName]="i">
+                      <div class="col-sm-5">
+                        <label class="form-label" for="skills{{ i }}">Skill : {{ i + 1 }}</label>
+                        <input [className]="
+                            item.get('skills').invalid &&
+                            (item.get('skills').dirty ||
+                              item.get('skills').touched)
+                              ? 'form-control is-invalid'
+                              : 'form-control'
+                          " type="text" id="skills{{ i }}" formControlName="skills" />
+
+                        <div *ngIf="
+                            item.get('skills').invalid &&
+                            (item.get('skills').dirty ||
+                              item.get('skills').touched)
+                          " class="invalid-feedback">
+                          <div *ngIf="item.get('skills').errors['required']">
+                            The name of Skill is required!
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-5">
+                        <label class="form-label" for="level{{ i }}">Level :</label>
+                        <input [className]="
+                            item.get('level').invalid &&
+                            (item.get('level').dirty ||
+                              item.get('level').touched)
+                              ? 'form-control is-invalid'
+                              : 'form-control'
+                          " min="1" max="7" type="number" id="level{{ i }}" formControlName="level" />
+                        <div *ngIf="
+                            item.get('level').invalid &&
+                            (item.get('level').dirty ||
+                              item.get('level').touched)
+                          " class="invalid-feedback">
+                          <div *ngIf="item.get('level').errors['required']">
+                            The skill level is required
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-2 d-flex align-items-end justify-content-between">
+                        <button class="btn btn-success" type="button" (click)="addSkill()">
+                          +
+                        </button>
+                        <button class="btn btn-danger" type="button" *ngIf="i > 0" (click)="removeSkill(i)">
+                          -
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-md-center mb-3">
+        <div class="col-md-auto w-50">
+          <button class="btn w-100 btn-primary" type="submit" [disabled]="cvForm.invalid">
+            Save
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
